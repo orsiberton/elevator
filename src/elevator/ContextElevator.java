@@ -4,67 +4,99 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContextElevator implements Cloneable {
+
+	private AdapterInterface adapterInterface = new Adapter();
+
 	public State state;
 	public Integer currentFloor;
 	public Integer nextFloor;
 	public Boolean hasMoreFloorToVisit;
-	public List<Integer> floors;
-	
+
 	public ContextElevator clone() {
 		try {
 			return (ContextElevator) super.clone();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
 
 	public void handleEvent(Object... in_colObject) {
 		if (in_colObject.length > 0) {
 			String eventName = (String) in_colObject[0];
-			
-			// TODO substituir isso por métodos do adaptador quando for realizar o T3 e o T4
+
 			if (eventName.equals("startupEvent")) {
-				this.state = State.Ligado_Parado;
-				this.currentFloor = 0;
-				this.nextFloor = -1;
-				this.hasMoreFloorToVisit = Boolean.FALSE;
-				this.floors = new ArrayList<Integer>();
+
+				this.adapterInterface.startUp();
+				this.currentFloor = this.adapterInterface.getCurrentFloor();
+				this.nextFloor = this.adapterInterface.getNextFloor();
+				this.hasMoreFloorToVisit = this.adapterInterface.hasMoreFloorToVisit();
+				this.state = this.adapterInterface.getCurrentState();
+
 			} else if (eventName.equals("shutdownEvent")) {
-				this.state = State.Desligado;
-				this.currentFloor = 0;
-				this.nextFloor = -1;
-				this.hasMoreFloorToVisit = Boolean.FALSE;
+
+				this.adapterInterface.shutDown();
+				this.currentFloor = this.adapterInterface.getCurrentFloor();
+				this.nextFloor = this.adapterInterface.getNextFloor();
+				this.hasMoreFloorToVisit = this.adapterInterface.hasMoreFloorToVisit();
+				this.state = this.adapterInterface.getCurrentState();
+
 			} else if (eventName.equals("requestEvent")) {
-				this.state = State.Ligado_Movimento;
-				this.currentFloor = 0;
-				this.nextFloor = (Integer) in_colObject[1];
-				this.hasMoreFloorToVisit = Boolean.TRUE;
-				this.floors.add(nextFloor);
+
+				this.adapterInterface.request((Integer) in_colObject[1]);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.currentFloor = this.adapterInterface.getCurrentFloor();
+				this.nextFloor = this.adapterInterface.getNextFloor();
+				this.hasMoreFloorToVisit = this.adapterInterface.hasMoreFloorToVisit();
+				this.state = this.adapterInterface.getCurrentState();
+
 			} else if (eventName.equals("selectEvent")) {
-				this.state = State.Ligado_Movimento;
-				this.currentFloor = 0;
-				this.nextFloor = (Integer) in_colObject[1];
-				this.hasMoreFloorToVisit = Boolean.TRUE;
-				this.floors.add(nextFloor);
+
+				this.adapterInterface.select((Integer) in_colObject[1]);
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.currentFloor = this.adapterInterface.getCurrentFloor();
+				this.nextFloor = this.adapterInterface.getNextFloor();
+				this.hasMoreFloorToVisit = this.adapterInterface.hasMoreFloorToVisit();
+				this.state = this.adapterInterface.getCurrentState();
+
 			} else if (eventName.equals("wrongFloorEvent")) {
-				this.state = State.Ligado_Movimento;
+				// DO NOTHING
 			} else if (eventName.equals("stopElevatorAtFloorEvent")) {
-				this.state = State.Ligado_Parado;
-				this.currentFloor = this.floors.get(0);
-				this.floors.remove(0);
-				this.nextFloor = this.floors.get(0);
-				this.hasMoreFloorToVisit = this.floors.size() != 0;
+
+				while (this.adapterInterface.getCurrentState() != State.Ligado_Parado) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+				this.currentFloor = this.adapterInterface.getCurrentFloor();
+				this.nextFloor = this.adapterInterface.getNextFloor();
+				this.hasMoreFloorToVisit = this.adapterInterface.hasMoreFloorToVisit();
+				this.state = this.adapterInterface.getCurrentState();
+
 			} else if (eventName.equals("attendsNextFloorEvent")) {
-				this.state = State.Ligado_Movimento;
-				this.nextFloor = this.floors.get(0);
-				this.hasMoreFloorToVisit = Boolean.TRUE;
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 }
-
-

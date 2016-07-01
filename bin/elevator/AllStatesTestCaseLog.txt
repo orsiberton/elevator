@@ -1,0 +1,18 @@
+### Test Case Generation Statistics
+### Test Goal Satisfaction
+ - defined 4 test goals
+ - satisfied 4 test goals (100.0 %)
+
+### unsatisfied test goals
+
+
+### satisfied test goals
+
+ - satisfied: (test goal #1 - node) 
+   reach state ElevatorSM::ElevatorR::End
+ - satisfied: (test goal #2 - node) 
+   reach state ElevatorSM::ElevatorR::Ligado_Movimento
+ - satisfied: (test goal #3 - node) 
+   reach state ElevatorSM::ElevatorR::Desligado
+ - satisfied: (test goal #4 - node) 
+   reach state ElevatorSM::ElevatorR::Ligado_Parado

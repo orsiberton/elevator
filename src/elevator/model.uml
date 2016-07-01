@@ -80,10 +80,14 @@
       </ownedBehavior>
       <ownedOperation xmi:id="_Dybh0DuzEeayVuoFd6sVvA" name="startupOp" method="_VVf2UDu7EeayVuoFd6sVvA" postcondition="_BKhEkDvYEeayVuoFd6sVvA">
         <ownedRule xmi:id="_BKhEkDvYEeayVuoFd6sVvA">
-          <specification xmi:type="uml:LiteralString" xmi:id="_CEDUoDvYEeayVuoFd6sVvA" value="(hasMoreFloorToVisit = false) and (currentFloor = 0) and (nextFloor = 0)"/>
+          <specification xmi:type="uml:LiteralString" xmi:id="_CEDUoDvYEeayVuoFd6sVvA" value="(hasMoreFloorToVisit = false) and (currentFloor = 0) and (nextFloor = -1)"/>
         </ownedRule>
       </ownedOperation>
-      <ownedOperation xmi:id="_g1k2ADu1EeayVuoFd6sVvA" name="shutdownOp" method="_P6hl8Du8EeayVuoFd6sVvA"/>
+      <ownedOperation xmi:id="_g1k2ADu1EeayVuoFd6sVvA" name="shutdownOp" method="_P6hl8Du8EeayVuoFd6sVvA" postcondition="_T4gGAD-vEeat4a7NUQgGIw">
+        <ownedRule xmi:id="_T4gGAD-vEeat4a7NUQgGIw">
+          <specification xmi:type="uml:LiteralString" xmi:id="_UvfYYD-vEeat4a7NUQgGIw" value="(hasMoreFloorToVisit = false) and (currentFloor = 0) and (nextFloor = -1)"/>
+        </ownedRule>
+      </ownedOperation>
       <ownedOperation xmi:id="_8Q47oDu1EeayVuoFd6sVvA" name="requestOp" method="_tqJtADu7EeayVuoFd6sVvA" postcondition="_SINUwDvYEeayVuoFd6sVvA">
         <ownedRule xmi:id="_SINUwDvYEeayVuoFd6sVvA">
           <specification xmi:type="uml:LiteralString" xmi:id="_THH0EDvYEeayVuoFd6sVvA" value="(hasMoreFloorToVisit = true) and (currentFloor = requestedFloor)"/>

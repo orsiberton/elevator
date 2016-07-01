@@ -4,14 +4,29 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 // JUnit 4.3
-public class TestCases{
+public class AllTransitionsTestCase{
 	
 	public static junit.framework.Test suite(){
-		return new junit.framework.JUnit4TestAdapter(TestCases.class);
+		return new junit.framework.JUnit4TestAdapter(AllTransitionsTestCase.class);
 	}
 	
 	@Test
 	public void test1()
+	{
+		ContextElevator oTestObject = new ContextElevator();
+		Integer requestedFloor2 = 4;
+		oTestObject.handleEvent("startupEvent");
+		assertEquals(true, (oTestObject.state == State.Ligado_Parado));
+		oTestObject.handleEvent("requestEvent", requestedFloor2);
+		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
+		//assertEquals(true, (oTestObject.currentFloor.intValue() > oTestObject.nextFloor.intValue()));
+		oTestObject.handleEvent("wrongFloorEvent");
+		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
+		
+	}
+	
+	@Test
+	public void test2()
 	{
 		ContextElevator oTestObject = new ContextElevator();
 		oTestObject.handleEvent("startupEvent");
@@ -21,24 +36,19 @@ public class TestCases{
 	}
 	
 	@Test
-	public void test2()
+	public void test3()
 	{
 		ContextElevator oTestObject = new ContextElevator();
-		Integer requestedFloor2 = -638626;
+		Integer selectedFloor2 = 7;
 		oTestObject.handleEvent("startupEvent");
 		assertEquals(true, (oTestObject.state == State.Ligado_Parado));
-		oTestObject.handleEvent("requestEvent", requestedFloor2);
-		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
-		oTestObject.handleEvent("stopElevatorAtFloorEvent");
-		assertEquals(true, (oTestObject.state == State.Ligado_Parado));
-		assertEquals(true, (oTestObject.hasMoreFloorToVisit.booleanValue() == true));
-		oTestObject.handleEvent("attendsNextFloorEvent");
+		oTestObject.handleEvent("selectEvent", selectedFloor2);
 		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
 		
 	}
 	
 	@Test
-	public void test3()
+	public void test4()
 	{
 		ContextElevator oTestObject = new ContextElevator();
 		oTestObject.handleEvent("startupEvent");
@@ -50,13 +60,18 @@ public class TestCases{
 	}
 	
 	@Test
-	public void test4()
+	public void test5()
 	{
 		ContextElevator oTestObject = new ContextElevator();
-		Integer selectedFloor2 = -24566;
+		Integer requestedFloor2 = 9;
 		oTestObject.handleEvent("startupEvent");
 		assertEquals(true, (oTestObject.state == State.Ligado_Parado));
-		oTestObject.handleEvent("selectEvent", selectedFloor2);
+		oTestObject.handleEvent("requestEvent", requestedFloor2);
+		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
+		oTestObject.handleEvent("stopElevatorAtFloorEvent");
+		assertEquals(true, (oTestObject.state == State.Ligado_Parado));
+		assertEquals(true, (oTestObject.hasMoreFloorToVisit.booleanValue() == true));
+		oTestObject.handleEvent("attendsNextFloorEvent");
 		assertEquals(true, (oTestObject.state == State.Ligado_Movimento));
 		
 	}

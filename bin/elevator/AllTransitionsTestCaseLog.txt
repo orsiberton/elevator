@@ -1,52 +1,52 @@
 ### Test Case Generation Statistics
 ### Test Goal Satisfaction
  - defined 9 test goals
- - satisfied 8 test goals (88.88888888888889 %)
+ - satisfied 9 test goals (100.0 %)
 
 ### unsatisfied test goals
 
- - not satisfied: (test goal #3 - traversed transition) 
+
+### satisfied test goals
+
+ - satisfied: (test goal #1 - traversed transition) 
+   from node ElevatorSM::ElevatorR::Ligado_Movimento
+   to node tmp3
+   triggered by stopElevatorAtFloorEvent
+ - satisfied: (test goal #2 - traversed transition) 
    from node ElevatorSM::ElevatorR::Ligado_Movimento
    to node tmp6
    triggered by wrongFloorEvent
    with condition truth: true
 ((currentFloor < nextFloor))
  or ((currentFloor > nextFloor))
-
-### satisfied test goals
-
- - satisfied: (test goal #1 - traversed transition) 
+ - satisfied: (test goal #3 - traversed transition) 
    from node ElevatorSM::ElevatorR::Desligado
    to node ElevatorSM::ElevatorR::End
    triggered by default
- - satisfied: (test goal #2 - traversed transition) 
-   from node ElevatorSM::ElevatorR::Ligado_Movimento
-   to node tmp3
-   triggered by stopElevatorAtFloorEvent
  - satisfied: (test goal #4 - traversed transition) 
-   from node ElevatorSM::ElevatorR::Ligado_Parado
-   to node tmp8
-   triggered by attendsNextFloorEvent
-   with condition truth: true
-((hasMoreFloorToVisit = true))
- - satisfied: (test goal #5 - traversed transition) 
    from node ElevatorSM::ElevatorR::Ligado_Parado
    to node tmp4
    triggered by shutdownEvent
- - satisfied: (test goal #6 - traversed transition) 
+ - satisfied: (test goal #5 - traversed transition) 
    from node ElevatorSM::ElevatorR::Ligado_Parado
-   to node tmp2
-   triggered by requestEvent
- - satisfied: (test goal #7 - traversed transition) 
+   to node tmp7
+   triggered by selectEvent
+ - satisfied: (test goal #6 - traversed transition) 
    from node ElevatorSM::ElevatorR::Ligado_Parado
    to node tmp5
    triggered by noMoreFloorsEvent
    with condition truth: true
 ((hasMoreFloorToVisit = false))
+ - satisfied: (test goal #7 - traversed transition) 
+   from node ElevatorSM::ElevatorR::Ligado_Parado
+   to node tmp8
+   triggered by attendsNextFloorEvent
+   with condition truth: true
+((hasMoreFloorToVisit = true))
  - satisfied: (test goal #8 - traversed transition) 
    from node ElevatorSM::ElevatorR::Ligado_Parado
-   to node tmp7
-   triggered by selectEvent
+   to node tmp2
+   triggered by requestEvent
  - satisfied: (test goal #9 - traversed transition) 
    from node ElevatorSM::ElevatorR::Init
    to node tmp1
